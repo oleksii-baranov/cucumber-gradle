@@ -1,3 +1,0 @@
-Cucumber Gradle Plugin
-===
-
