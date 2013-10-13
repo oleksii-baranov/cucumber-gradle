@@ -10,17 +10,15 @@ import static org.junit.Assert.assertEquals;
 
 public class GreetingSteps {
 
-	private Greeter greeter = new Greeter();
-	private String response;
+	private Greeter greeter = Greeter.instance();
 
 	@Given("^I am not logged in$")
 	public void I_am_not_logged_in() throws Throwable {
-		greeter.setLoginName(null);
 	}
 
 	@When("^I say \"([^\"]*)\"$")
 	public void I_say(String whatISaid) throws Throwable {
-		response = greeter.respond(whatISaid);
+		greeter.respond(whatISaid);
 	}
 
 	@Given("^I am logged in as \"([^\"]*)\"$")
@@ -30,7 +28,7 @@ public class GreetingSteps {
 
 	@Then("^the computer should say, \"([^\"]*)\"$")
 	public void the_computer_should_say(String computersResponse) throws Throwable {
-		assertEquals(computersResponse,  response);
+		assertEquals(computersResponse, greeter.getResponse());
 	}
 
 	@When("^I wait (\\d+) seconds?$")

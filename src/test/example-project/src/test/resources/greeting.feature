@@ -19,3 +19,8 @@ Feature: Greetings
     When I say "Hello, computer."
     And I wait 1 second
     Then the computer should say, "Hello, Bob!"
+
+  Scenario: My computer says goodbye
+    Given I am logged in as "Bob"
+    When I leave the room
+    Then the computer should say, "Goodbye, Bob!"

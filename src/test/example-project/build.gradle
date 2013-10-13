@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'cucumber'
+apply plugin: 'scala'
 
 buildscript {
     repositories {
@@ -21,9 +22,12 @@ repositories {
 dependencies {
     // define your version of Cucumber to use
     testCompile 'info.cukes:cucumber-java:1.1.5'
+    testCompile 'info.cukes:cucumber-scala_2.10:1.1.5'
     // it is recommended to use this Gherkin version or later to get proper output flushing
     testCompile 'info.cukes:gherkin:2.12.2'
     testCompile 'junit:junit:4.11'
+
+    testCompile 'org.scala-lang:scala-library:2.10.3'
 }
 
 // a 'cucumber' task is added by the cucumber plugin

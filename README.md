@@ -17,7 +17,7 @@ Add the following to your build.gradle:
 
     apply plugin: 'cucumber'
 
-This will add a `cucumber` task that runs all features in 'src/test/resources' with glue defined in 'src/test/java'.
+This will add a `cucumber` task that runs all features in `src/test/resources` with glue defined in `src/test/java`.
 
 The `cucumber` task extends `JavaExec` so any properties that work on `JavaExec` should also work on `cucumber`, e.g.:
 
