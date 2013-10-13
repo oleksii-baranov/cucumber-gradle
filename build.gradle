@@ -31,5 +31,16 @@ task installTestPlugin(type: Upload) {
     configuration = configurations.archives
 }
 
+uploadArchives {
+    uploadDescriptor = true
+    repositories {
+        mavenDeployer {
+            repository(url: mavenDeployUrl) {
+                authentication(userName: mavenDeployUsername, password: mavenDeployPassword)
+            }
+        }
+    }
+}
+
 testPlugin.dependsOn installTestPlugin
 test.dependsOn testPlugin
