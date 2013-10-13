@@ -1,9 +1,11 @@
+import org.gradle.logging.ShowStacktrace
+
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'maven'
 
-ext.testRepoURL = file("$buildDir/repo").toURI().toURL()
+ext.testRepoURL = uri("$buildDir/repo")
 
 repositories {
     mavenCentral()
@@ -19,6 +21,7 @@ task testPlugin(type: GradleBuild) {
     dir file('src/test/example-project')
     startParameter.projectProperties['mavenRepo'] = testRepoURL
     startParameter.projectProperties['cukeTags'] = '~@wip'
+    startParameter.showStacktrace = ShowStacktrace.ALWAYS_FULL
     tasks += 'cucumber'
 }
 

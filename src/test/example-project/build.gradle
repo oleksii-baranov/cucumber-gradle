@@ -5,8 +5,12 @@ apply plugin: 'scala'
 
 buildscript {
     repositories {
-        maven {
-            url project.mavenRepo
+        if (project.hasProperty('mavenRepo')) {
+            maven {
+                url project.mavenRepo
+            }
+        } else {
+            mavenLocal()
         }
     }
     // add dependency to get the cucumber plugin
@@ -39,8 +43,13 @@ cucumber {
     // or add any other JavaExec properties here, but don't change 'args'!
     systemProperty 'customSystemProperty', 'avalue'
 
+    htmlReport false
+
     // assertions are already enabled
     // enableAssertions true
 
     // set property cukeDebug=true to debug
+    features += file('features')
+
+    glue += 'example'
 }

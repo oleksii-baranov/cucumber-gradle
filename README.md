@@ -1,7 +1,7 @@
-Cucumber Gradle Plugin
+Cucumber-JVM Gradle Plugin
 ===
 
-Add the following to your build.gradle:
+Add the following to your `build.gradle`:
 
     buildscript {
         repositories {
@@ -11,21 +11,37 @@ Add the following to your build.gradle:
         }
 
         dependencies {
-            classpath 'cucumber.contrib.gradle:cucumber-gradle:0.1.0'
+            classpath 'cucumber.contrib.gradle:cucumber-gradle:0.2.0'
         }
     }
 
     apply plugin: 'cucumber'
 
-This will add a `cucumber` task that runs all features in `src/test/resources` with glue defined in `src/test/java`.
+This will add a `cucumber` task that runs all features in `src/test/resources`.
 
-The `cucumber` task extends `JavaExec` so any properties that work on `JavaExec` should also work on `cucumber`, e.g.:
+The `cucumber` task extends `JavaExec` so any properties that work on `JavaExec` should also work on `cucumber`,
+in addition to cucumber-specific properties:
 
     cucumber {
-        systemProperty 'mySystemPropery', 'somveValue'
+        systemProperty 'mySystemProperty', 'someValue'
+        jvmArgs '-Xmx1G'
+
+        // glue defaults to all packages in compile output if not specified
+        glue += 'com.example.glue'
+
+        // The following are default the values:
+        features += project.sourceSets.test.output.resourcesDir
+        htmlReport true
+        jsonReport true
+        junitReport true
+        progressOutput false
+        prettyOutput true
+
+        // monochrome defaults to use Gradle --color flag
+        monochrome false
     }
 
-Assertions are enabled by default. Do not modify the `mainClass` or `args` properties.
+Assertions are enabled by default. Do not modify the `mainClass` or `args` properties unless you know what you're doing.
 
 Additionally, the `cucumber` task reads certain project properties, making it easier to invoke from the commandline.
 
